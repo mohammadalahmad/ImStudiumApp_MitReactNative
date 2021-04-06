@@ -46,7 +46,7 @@ function MenuScreen({ navigation: { navigate } }) {
   }
   
   
-    function HomeScreen({ navigation }) {
+    function Stundenplan1({ navigation }) {
       return (
         <View style={{ flexDirection: "row",  justifyContent: "flex-end" }}>
  
@@ -84,7 +84,7 @@ function MenuScreen({ navigation: { navigate } }) {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="ImStudium" component={MenuScreen} />
-          <Stack.Screen  name="Stundenplan" component={HomeScreen}/>
+          <Stack.Screen  name="Stundenplan" component={Stundenplan1}/>
           <Stack.Screen name="Mensa" component={MensaScreen} />
           <Stack.Screen name="Gut Zu Wissen" component={GutZuWissen} /> 
         </Stack.Navigator>
