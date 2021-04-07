@@ -1,6 +1,3 @@
-
-
- 
 import 'react-native-gesture-handler';
 import React, {Component}from "react";
 import Index from "./ImStudium/Index";

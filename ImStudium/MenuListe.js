@@ -7,8 +7,6 @@ import Stundenplan from "./Stundenplan";
 import Mensa from "./Mensa";
 import Buttons from "./Buttons";
 import ZuWissen from "./ZuWissen";
- 
- 
 
 function MenuScreen({ navigation: { navigate } }) {
   
@@ -45,7 +43,6 @@ function MenuScreen({ navigation: { navigate } }) {
     );
   }
   
-  
     function Stundenplan1({ navigation }) {
       return (
         <View style={{ flexDirection: "row",  justifyContent: "flex-end" }}>
@@ -56,9 +53,6 @@ function MenuScreen({ navigation: { navigate } }) {
         </View>
       );
     }
-
-
-
 
   function MensaScreen() {
     return (
@@ -98,7 +92,7 @@ export default MenuListe;
   
     HomeScreen: {
         backgroundColor: "#DFDFE6",
-       flex:1,
+        flex:1,
         alignItems: 'center', //Horizontal Alignment
         justifyContent: "center", //Vertical Alignment
   
@@ -124,20 +118,7 @@ export default MenuListe;
     justifyContent: "center", //Vertical Alignment
      
   },   
-  buttoneinfügen:{
-    borderRadius: 10,
-    backgroundColor: "#FFF",
-    alignSelf: "stretch",
-    height: 30,
-    margin:5,
-    borderColor: "#FF9933",
-    borderWidth:2,
-    padding: 10,
-    alignItems: 'center',  
-    justifyContent: "center",
-    width: 130,
-   
-},
+  
 Texteinfügen: {
     fontWeight: "600",
     paddingTop:15,
@@ -164,6 +145,7 @@ buttoneinfügen1:{
 },
   });
 
+ 
  
  
  
