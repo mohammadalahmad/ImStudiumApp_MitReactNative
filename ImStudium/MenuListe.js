@@ -124,20 +124,7 @@ export default MenuListe;
     justifyContent: "center", //Vertical Alignment
      
   },   
-  buttoneinfügen:{
-    borderRadius: 10,
-    backgroundColor: "#FFF",
-    alignSelf: "stretch",
-    height: 30,
-    margin:5,
-    borderColor: "#FF9933",
-    borderWidth:2,
-    padding: 10,
-    alignItems: 'center',  
-    justifyContent: "center",
-    width: 130,
-   
-},
+ 
 Texteinfügen: {
     fontWeight: "600",
     paddingTop:15,
