@@ -128,6 +128,7 @@ Texteinfügen: {
     fontSize: 15,
 
 },
+//buttoneinfügen1
 buttoneinfügen1:{
   borderRadius: 10,
   backgroundColor: "#FFF",
