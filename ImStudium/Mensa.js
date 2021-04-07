@@ -8,7 +8,7 @@ class Mensa extends Component {
     constructor(){
         super();
         this.state = {
-            title: "Mensa",
+            title: "Bildschirm für Mensa",
         }
     }
     render (){

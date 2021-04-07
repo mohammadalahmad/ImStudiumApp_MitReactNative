@@ -118,7 +118,7 @@ export default MenuListe;
     justifyContent: "center", //Vertical Alignment
      
   },   
-  
+  //Texteinfügen
 Texteinfügen: {
     fontWeight: "600",
     paddingTop:15,
@@ -129,6 +129,7 @@ Texteinfügen: {
 
 },
 //buttoneinfügen1
+
 buttoneinfügen1:{
   borderRadius: 10,
   backgroundColor: "#FFF",
