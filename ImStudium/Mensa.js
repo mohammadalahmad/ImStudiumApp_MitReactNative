@@ -3,101 +3,42 @@ import React, {Component}from "react";
 import { Alert, Text, StyleSheet, TouchableOpacity, View} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-//Create Component
+var mensaListe = [
+    { id: 1, name: "Mensa Große Pause", },
+    { id: 2, name: "Mensa TiHo-Tower", },
+    { id: 3, name: "Mensa Caballus", },
+    { id: 4, name: "Hauptmensa", },
+    { id: 5, name: "Contine", },
+    { id: 6, name: "Mensa Campus Linden", },
+    { id: 7, name: "Mensa HMTMH", },
+    { id: 8, name: "Marktstand Hauptmensa", },
+    { id: 9, name: "Cafeteria Herrenhausen", },
+    { id: 10, name: "Mensa PZH", },
+    { id: 11, name: "Mensa Blumhardtstraße", },
+];
 
+//Create Component
 class Mensa extends Component {
+
+    renderMensaListe() {
+        return mensaListe.map(einzelneMensa => (
+            <TouchableOpacity
+                key={einzelneMensa.id}
+                style={styles.mensaButton} 
+                onPress={() => Alert.alert("Mensa-Auswahl", "Mensa")}
+            >
+                <View>
+                    <Text style={styles.mensaButtonText}>{einzelneMensa.name}</Text>
+                </View>
+            </TouchableOpacity>
+        ));
+    }
+
     render (){
         return(
             <View style={styles.container}>
                 <ScrollView>
-                    <TouchableOpacity
-                        style={styles.mensaButton} 
-                        onPress={() => Alert.alert("Mensa-Auswahl", "Mensa")}
-                    >
-                        <View>
-                            <Text style={styles.mensaButtonText}>Mensa Große Pause</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.mensaButton} 
-                        onPress={() => Alert.alert("Mensa-Auswahl", "Mensa")}
-                    >
-                        <View>
-                            <Text style={styles.mensaButtonText}>Mensa TiHo-Tower</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.mensaButton} 
-                        onPress={() => Alert.alert("Mensa-Auswahl", "Mensa")}
-                    >
-                        <View>
-                            <Text style={styles.mensaButtonText}>Mensa Caballus</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.mensaButton} 
-                        onPress={() => Alert.alert("Mensa-Auswahl", "Mensa")}
-                    >
-                        <View>
-                            <Text style={styles.mensaButtonText}>Hauptmensa</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.mensaButton} 
-                        onPress={() => Alert.alert("Mensa-Auswahl", "Mensa")}
-                    >
-                        <View>
-                            <Text style={styles.mensaButtonText}>Contine</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.mensaButton} 
-                        onPress={() => Alert.alert("Mensa-Auswahl", "Mensa")}
-                    >
-                        <View>
-                            <Text style={styles.mensaButtonText}>Mensa Campus Linden</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.mensaButton} 
-                        onPress={() => Alert.alert("Mensa-Auswahl", "Mensa")}
-                    >
-                        <View>
-                            <Text style={styles.mensaButtonText}>Mensa HMTMH</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.mensaButton} 
-                        onPress={() => Alert.alert("Mensa-Auswahl", "Mensa")}
-                    >
-                        <View>
-                            <Text style={styles.mensaButtonText}>Marktstand Hauptmensa</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.mensaButton} 
-                        onPress={() => Alert.alert("Mensa-Auswahl", "Mensa")}
-                    >
-                        <View>
-                            <Text style={styles.mensaButtonText}>Cafeteria Herrenhausen</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.mensaButton} 
-                        onPress={() => Alert.alert("Mensa-Auswahl", "Mensa")}
-                    >
-                        <View>
-                            <Text style={styles.mensaButtonText}>Mensa PZH</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.mensaButton} 
-                        onPress={() => Alert.alert("Mensa-Auswahl", "Mensa")}
-                    >
-                        <View>
-                            <Text style={styles.mensaButtonText}>Mensa Blumhardtstraße</Text>
-                        </View>
-                    </TouchableOpacity>
+                    {this.renderMensaListe()}
                 </ScrollView>
             </View>
         )
