@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Stundenplan from "./Stundenplan";
 import Mensa from "./Mensa";
+import MensaPlan from "./MensaPlan";
 import Buttons from "./Buttons";
 import ZuWissen from "./ZuWissen";
  
@@ -60,10 +61,20 @@ function MenuScreen({ navigation: { navigate } }) {
 
 
 
-  function MensaScreen() {
+  function MensaScreen({ navigation }) {
     return (
       <View style={styles.HomeScreen}>
+        
         <Mensa />
+        
+      </View>
+    );
+  }
+
+  function MensaPlanScreen() {
+    return (
+      <View style={styles.HomeScreen}>
+        <MensaPlan />
         
       </View>
     );
@@ -86,6 +97,7 @@ function MenuScreen({ navigation: { navigate } }) {
           <Stack.Screen name="ImStudium" component={MenuScreen} />
           <Stack.Screen  name="Stundenplan" component={Stundenplan1}/>
           <Stack.Screen name="Mensa" component={MensaScreen} />
+          <Stack.Screen name="MensaPlan" component={MensaPlanScreen} />
           <Stack.Screen name="Gut Zu Wissen" component={GutZuWissen} /> 
         </Stack.Navigator>
       </NavigationContainer>
