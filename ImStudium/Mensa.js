@@ -5,7 +5,7 @@ import {Alert, Text, StyleSheet, TouchableOpacity, View} from "react-native";
 import {ScrollView} from "react-native-gesture-handler";
 import {useNavigation} from '@react-navigation/native';
 
-var mensaListe = [
+var mensaListe = [ // hier weitere Parameter einfügen wie z.B. Öffnungszeiten, RSS-URLs etc.
     { id: 1, name: "Mensa Große Pause", },
     { id: 2, name: "Mensa TiHo-Tower", },
     { id: 3, name: "Mensa Caballus", },

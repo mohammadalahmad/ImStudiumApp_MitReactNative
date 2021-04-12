@@ -1,20 +1,50 @@
 //Import needed Libraries
-import React, {Component}from "react";
+import React, {Component, useState}from "react";
 import { Alert, Text, StyleSheet, TouchableOpacity, View} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import * as rssParser from 'react-native-rss-parser';
 
 //Create Component
 class MensaPlan extends React.Component {
+
+    constructor(){
+        super();
+        this.state = {
+            feed: { title: "", items: [] },
+        }     
+    }
+
+    RSS() {
+        return fetch('http://www.stwh-portal.de/mensa/index.php?wo=0&wann=1&format=rss')
+            .then((response) => response.text())
+            .then((responseData) => rssParser.parse(responseData))
+            .then((rss) => {
+                this.setState(() => ({
+                    feed: rss
+                }));
+            });
+    }
+
+    componentDidMount() {
+        this.RSS();
+    }
+
     render (){
         const { navigation } = this.props;
         const routeIndex = navigation.dangerouslyGetState().index;
-        const mensaName =  navigation.dangerouslyGetState().routes[routeIndex].params.mensaName
+        const mensaName =  navigation.dangerouslyGetState().routes[routeIndex].params.mensaName;
 
         return(
             <View style={styles.container}>
                 <ScrollView>
-                    <Text>{ mensaName }</Text>
+                    <Text>{ mensaName } ausgewählt.</Text>
+                    <Text>{this.state.feed.title}:</Text>
+                    {this.state.feed.items.map((item, i) => (
+                        <Text key={i}>
+                            {item.description}
+                        </Text>
+                    ))}
                 </ScrollView>
             </View>
         )
