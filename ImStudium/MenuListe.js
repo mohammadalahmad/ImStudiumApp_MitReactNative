@@ -7,7 +7,7 @@ import Stundenplan from "./Stundenplan";
 import Mensa from "./Mensa";
 import Buttons from "./Buttons";
 import ZuWissen from "./ZuWissen";
- 
+import Test from "./Test";
  
 
 function MenuScreen({ navigation: { navigate } }) {
@@ -44,14 +44,16 @@ function MenuScreen({ navigation: { navigate } }) {
         </View>
     );
   }
-  
-  
+
+   
+
     function Stundenplan1({ navigation }) {
+       
       return (
         <View style={{ flexDirection: "row",  justifyContent: "flex-end" }}>
  
-          <TouchableOpacity style={styles.buttoneinfügen1}> 
-                <Text style={styles.Texteinfügen}>Kurs einfügen</Text>
+          <TouchableOpacity style={styles.buttoneinfügen1}   > 
+                <Text    style={styles.Texteinfügen}>Kurs einfügen</Text>
           </TouchableOpacity>
         </View>
       );
@@ -63,7 +65,7 @@ function MenuScreen({ navigation: { navigate } }) {
   function MensaScreen() {
     return (
       <View style={styles.HomeScreen}>
-        <Mensa />
+        <Test />
         
       </View>
     );
@@ -84,7 +86,7 @@ function MenuScreen({ navigation: { navigate } }) {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="ImStudium" component={MenuScreen} />
-          <Stack.Screen  name="Stundenplan" component={Stundenplan1}/>
+          <Stack.Screen  name="Stundenplan"  component={Stundenplan1}/>
           <Stack.Screen name="Mensa" component={MensaScreen} />
           <Stack.Screen name="Gut Zu Wissen" component={GutZuWissen} /> 
         </Stack.Navigator>

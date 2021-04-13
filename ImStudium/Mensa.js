@@ -1,20 +1,25 @@
  //Import needed Libraries
  import React, {Component}from "react";
- import { Text, StyleSheet, View} from "react-native";
-
+ import { Text, StyleSheet, View, TouchableOpacity} from "react-native";
+ import Stundenplan from "./Stundenplan";
 //Create Component
 
 class Mensa extends Component {
-    constructor(){
+     
+    constructor(props){
+         
         super();
         this.state = {
             title: "Bildschirm von Mensa",
         }
     }
+     
     render (){
+         
         return(
             <View style={styles.menu}> 
                  <Text style= {styles.text}>{this.state.title}</Text> 
+                  
             </View>
         )
     }

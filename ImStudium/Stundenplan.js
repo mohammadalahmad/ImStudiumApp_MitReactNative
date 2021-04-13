@@ -10,12 +10,13 @@ class Stundenplan extends Component {
           title: "Stundenplan",
       }
   }
-  
+   
   render (){
+
       return(
           <View style={styles.menu}> 
                <Text style= {styles.text}>{this.state.title}</Text> 
-               
+                
           </View>
       )
    }
