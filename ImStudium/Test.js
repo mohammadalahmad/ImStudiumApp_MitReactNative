@@ -13,9 +13,9 @@ const Greeting = (props) => {
 export default Test = () => {
     return (
       <View>
-        <Greeting name='Test1' />
-        <Greeting name='Test2' />
-        <Greeting name='Test3' />
+        <Greeting name='Rexxarss' />
+        <Greeting name='Jainsa' />
+        <Greeting name='Valeera' />
       </View>
     );
 }
