@@ -1,9 +1,37 @@
+<<<<<<< HEAD
  //Import needed Libraries
  import React, {Component}from "react";
  import { Text, StyleSheet, View, TouchableOpacity} from "react-native";
  import Stundenplan from "./Stundenplan";
-//Create Component
+=======
+//Import needed Libraries
+import React, {Component}from "react";
+import {Alert, Text, StyleSheet, TouchableOpacity, View} from "react-native";
+// import { useNavigation } from '@react-navigation/native';
+import {ScrollView} from "react-native-gesture-handler";
+import {useNavigation} from '@react-navigation/native';
 
+var mensaListe = [ // hier weitere Parameter einfügen wie z.B. Öffnungszeiten, RSS-URLs etc.
+    { id: 1, name: "Mensa Große Pause", },
+    { id: 2, name: "Mensa TiHo-Tower", },
+    { id: 3, name: "Mensa Caballus", },
+    { id: 4, name: "Hauptmensa", },
+    { id: 5, name: "Contine", },
+    { id: 6, name: "Mensa Campus Linden", },
+    { id: 7, name: "Mensa HMTMH", },
+    { id: 8, name: "Marktstand Hauptmensa", },
+    { id: 9, name: "Cafeteria Herrenhausen", },
+    { id: 10, name: "Mensa PZH", },
+    { id: 11, name: "Mensa Blumhardtstraße", },
+];
+
+>>>>>>> 6496c866ee6f98adbe520984a2d2ca4195e5d302
+//Create Component
+class Mensa extends React.Component {
+    renderMensaListe() {
+        const { navigation } = this.props;
+
+<<<<<<< HEAD
 class Mensa extends Component {
      
     constructor(props){
@@ -20,30 +48,63 @@ class Mensa extends Component {
             <View style={styles.menu}> 
                  <Text style= {styles.text}>{this.state.title}</Text> 
                   
+=======
+        return mensaListe.map(einzelneMensa => (
+            <TouchableOpacity
+                key={einzelneMensa.id}
+                style={styles.mensaButton} 
+                onPress={() => navigation.navigate('MensaPlan', { mensaName: einzelneMensa.name })}
+            >
+                <View>
+                    <Text style={styles.mensaButtonText}>{einzelneMensa.name}</Text>
+                </View>
+            </TouchableOpacity>
+        ));
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <ScrollView>
+                    {this.renderMensaListe()}
+                </ScrollView>
+>>>>>>> 6496c866ee6f98adbe520984a2d2ca4195e5d302
             </View>
         )
     }
-
 }
+
+// Wrap and export
+export default function(props) {
+    const navigation = useNavigation();
+
+    return <Mensa navigation={navigation} />;
+}
+
 
 const styles = StyleSheet.create({
 
-        menu: {
-            backgroundColor: "#DFDFE6",
-            height: 80,
-            alignItems: 'center', //Horizontal Alignment
-            justifyContent: "center", //Vertical Alignment
-        },
-        text: {
-            fontSize: 25,
-            fontWeight: 'bold',
-        }
-
-
+    container: {
+        backgroundColor: "white",
+        flex: 1,
+        width: "100%",
+    },
+    mensaButton: {
+        width: "100%",
+        height: 70,
+        backgroundColor: "white",
+        padding: 15,
+        alignItems: "flex-start",
+        justifyContent: "center",
+        borderBottomColor: '#CCCCCC',
+        borderBottomWidth: .5,
+        borderTopColor: '#CCCCCC',
+        borderTopWidth: .5,
+    },
+    mensaButtonText: {
+        color: "black",
+        fontSize: 18,       
+    },
 
 });
- 
-// Export the Component to be avaible for other component in the apps
-export default Mensa ;
-
  
