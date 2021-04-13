@@ -5,6 +5,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import * as rssParser from 'react-native-rss-parser';
 
+// Test
 //Create Component
 class MensaPlan extends React.Component {
 
