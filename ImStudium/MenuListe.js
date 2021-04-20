@@ -5,7 +5,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Stundenplan from "./Stundenplan";
 import Mensa from "./Mensa";
-import MensaPlan from "./MensaPlan";
 import Buttons from "./Buttons";
 import ZuWissen from "./ZuWissen";
  
