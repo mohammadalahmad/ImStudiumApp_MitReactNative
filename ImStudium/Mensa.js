@@ -1,9 +1,11 @@
 //Import needed Libraries
 import React, {Component}from "react";
-import {Alert, Text, StyleSheet, TouchableOpacity, View, ActivityIndicator} from "react-native";
+import {Alert, Button, Platform, Text, StyleSheet, TouchableOpacity, View, ActivityIndicator} from "react-native";
 import {Picker} from '@react-native-picker/picker';
 import {ScrollView} from "react-native-gesture-handler";
 import * as rssParser from 'react-native-rss-parser';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import DatePicker from 'react-native-datepicker';
 
 var mensaListe = [ // hier weitere Parameter einfügen wie z.B. Öffnungszeiten, RSS-URLs etc.
     { id: 1, name: "Mensa Große Pause", rssHeute: "https://www.stwh-portal.de/mensa/index.php?wo=7&wann=1&format=rss", },
@@ -29,6 +31,9 @@ class Mensa extends Component {
             feed: { title: "", items: [] },
             selectedMensa: 1,
             loading: false,
+            date: new Date(),
+            mode: 'date',
+            show: false,
         };
     }
     
@@ -62,7 +67,7 @@ class Mensa extends Component {
     componentDidMount() {
         this.RSS(1);
     }
-
+    
     buildMensaPicker() {
         return (
             <View style={styles.mensaPickerView}>
@@ -82,6 +87,70 @@ class Mensa extends Component {
     changeMensa(value) {
         this.RSS(value);
     }
+    /*
+    setDate = (event, date) => {
+        console.log("Inside onChangeMINE.  selectedDate=" + date);
+      }
+
+    show = mode => {
+        this.setState({
+            show: true,
+            mode,
+        });
+    }
+    
+    datepicker = () => {
+        this.show('date');
+    }
+
+    buildDatePicker() {
+        console.log("Date");
+        return (
+            <View>
+                <View>
+                    <Button onPress={this.datepicker} title="Datum" />
+                </View>
+                { this.state.show && (
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        value={this.state.date}
+                        mode={this.state.mode}
+                        display="default"
+                        onChange={this.setDate}
+                    />
+                )}
+            </View>
+        )
+    }
+    */
+
+    buildDatePicker() {
+        return (
+            <DatePicker
+                style={{width: 200}}
+                date={this.state.date}
+                mode="date"
+                placeholder="select date"
+                format="YYYY-MM-DD"
+                minDate="2016-05-01"
+                maxDate="2016-06-01"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                customStyles={{
+                    dateIcon: {
+                        position: 'absolute',
+                        left: 0,
+                        top: 4,
+                        marginLeft: 0
+                    },
+                    dateInput: {
+                        marginLeft: 36
+                    }
+                }}
+                onDateChange={(date) => {this.setState({date: date})}}
+            />
+        )
+    }
 
     render (){
         const speiseplanObject = { mensaID: this.state.selectedMensa, speiseplan: this.state.feed.items.map(item => item.description) };
@@ -91,6 +160,7 @@ class Mensa extends Component {
 
             return(
                 <View style={styles.container}>
+                    {this.buildDatePicker()}
                     {this.buildMensaPicker()}
                     <ScrollView>{plan}</ScrollView>
                 </View>
