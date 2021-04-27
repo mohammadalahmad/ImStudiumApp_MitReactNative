@@ -4,7 +4,6 @@ import {Alert, Button, Platform, Text, StyleSheet, TouchableOpacity, View, Activ
 import {Picker} from '@react-native-picker/picker';
 import {ScrollView} from "react-native-gesture-handler";
 import * as rssParser from 'react-native-rss-parser';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import DatePicker from 'react-native-datepicker';
 
 var mensaListe = [ // hier weitere Parameter einfügen wie z.B. Öffnungszeiten, RSS-URLs etc.
