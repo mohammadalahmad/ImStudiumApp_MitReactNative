@@ -1,10 +1,11 @@
 //Import needed Libraries
 import React, {Component}from "react";
-import {Alert, Button, Platform, Text, StyleSheet, TouchableOpacity, View, ActivityIndicator} from "react-native";
+import {Alert, Button, Image, Platform, Text, StyleSheet, TouchableOpacity, View, ActivityIndicator} from "react-native";
 import {Picker} from '@react-native-picker/picker';
 import {ScrollView} from "react-native-gesture-handler";
 import * as rssParser from 'react-native-rss-parser';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import Moment from 'moment';
 
 var mensaListe = [ // hier weitere Parameter einfügen wie z.B. Öffnungszeiten, RSS-URLs etc.
     { id: 1, name: "Mensa Große Pause", rssHeute: "https://www.stwh-portal.de/mensa/index.php?wo=7&wann=1&format=rss", },
@@ -31,6 +32,7 @@ class Mensa extends Component {
             selectedMensa: 1,
             loading: false,
             date: new Date(),
+            dateIn14Days: Moment(new Date()).add(14, "days"),
             mode: 'date',
             show: false,
         };
@@ -107,14 +109,28 @@ class Mensa extends Component {
         return (
             <View style={styles.datePickerView}>
                 
-                <Button onPress={this.datepicker} title="Datum" style={styles.datePickerButton} />
-                
+                <TouchableOpacity
+                    style={styles.datePickerButton} 
+                    onPress={this.datepicker}
+                >
+                    <View>
+                        <Text style={styles.datePickerText}>{Moment(this.state.date).format("DD.MM.YYYY")}</Text>
+                    </View>
+                    <View style={styles.calendarIconView}>
+                        <Image
+                            style={styles.calendarIcon}
+                            source={require("../assets/icon_calendar.png")}
+                        />
+                </View>
+                </TouchableOpacity>            
                 { this.state.show && (
                     <DateTimePicker
                         testID="dateTimePicker"
                         value={this.state.date}
-                        mode={this.state.mode}
+                        mode="date"
                         display="default"
+                        maximumDate={this.state.date}
+                        minimumDate={this.state.date}
                         onChange={this.setDate}
                     />
                 )}
@@ -130,7 +146,7 @@ class Mensa extends Component {
 
             return(
                 <View style={styles.container}>
-                    <View stlye={styles.PickerContainer}>
+                    <View style={styles.PickerContainer}>
                         {this.buildDatePicker()}
                         {this.buildMensaPicker()}
                     </View>
@@ -140,7 +156,7 @@ class Mensa extends Component {
         } else {
             return (
                 <View style={styles.container}>
-                    <View stlye={styles.PickerContainer}>
+                    <View style={styles.PickerContainer}>
                         {this.buildDatePicker()}
                         {this.buildMensaPicker()}
                     </View>
@@ -160,15 +176,38 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100
       },
+    calendarIcon: {
+
+    },
+    calendarIconView: {
+        paddingLeft: 10,
+    },
     container: {
         backgroundColor: "white",
         width: "100%",
         flex: 1,
     },
     datePickerButton: {
-
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 1,
+        flexDirection: "row",
+    },
+    datePickerText: {
+        color: "black",
+        fontSize: 18,
+        borderStyle: "solid",
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "black",
+        paddingHorizontal: 10,
+        textAlign: "center",
     },
     datePickerView: {
+        width: "45%",
+        backgroundColor: "white",
+        alignSelf: "flex-start",
 
     },
     menuePunktStyle: {
@@ -187,26 +226,18 @@ const styles = StyleSheet.create({
         fontSize: 18,       
     },
     mensaPicker: {
-        
+        height: 50,
+        width: "100%",
     },
     mensaPickerView: {
         backgroundColor: "white",
-        height: 70,
+        height: 50,
+        width: "55%",
+        alignSelf: "flex-end",        
         justifyContent: "center",
-        alignItems: "center",
-
-        //height: 70,
-        //flex: 1,
-        //alignItems: "center",
-        //justifyContent: "center",
     },
     PickerContainer: {
-        //height: 100,
-        //top: 50,
-        //flexDirection: "row",
-        //width: "100%",
-        //flexDirection: "row",
-        //flexWrap: "wrap",
+        flexDirection: "row",
     },
     waitContainer: {
         backgroundColor: "#e1e1e1",
