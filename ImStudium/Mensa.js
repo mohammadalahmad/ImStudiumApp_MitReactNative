@@ -4,7 +4,7 @@ import {Alert, Button, Platform, Text, StyleSheet, TouchableOpacity, View, Activ
 import {Picker} from '@react-native-picker/picker';
 import {ScrollView} from "react-native-gesture-handler";
 import * as rssParser from 'react-native-rss-parser';
-import DatePicker from 'react-native-datepicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 var mensaListe = [ // hier weitere Parameter einfügen wie z.B. Öffnungszeiten, RSS-URLs etc.
     { id: 1, name: "Mensa Große Pause", rssHeute: "https://www.stwh-portal.de/mensa/index.php?wo=7&wann=1&format=rss", },
@@ -71,8 +71,8 @@ class Mensa extends Component {
         return (
             <View style={styles.mensaPickerView}>
                 <Picker
-                    style={{height: 50, width: "100%"}}
-                    // selectedValue={1} wenn man dann Große Pause auswählt, wird die nicht neu geladen
+                    selectedValue={this.state.selectedMensa}
+                    style={styles.mensaPicker}
                     onValueChange={value => { this.setState(() => ({ loading: true })); this.changeMensa(value); } }
                 >
                     {mensaListe.map((einzelneMensa, id) => (
@@ -84,18 +84,19 @@ class Mensa extends Component {
     }
 
     changeMensa(value) {
+        this.setState(() => ({ selectedMensa: value }));
         this.RSS(value);
     }
-    /*
-    setDate = (event, date) => {
-        console.log("Inside onChangeMINE.  selectedDate=" + date);
+    
+    setDate = (event, selectedDate) => {
+        console.log("selectedDate=" + selectedDate);
+            const currentDate = selectedDate || this.state.date;
+            this.setState(() => ({ show: Platform.OS === 'ios' }));
+            this.setState(() => ({ date: currentDate }));
       }
 
     show = mode => {
-        this.setState({
-            show: true,
-            mode,
-        });
+        this.setState({ show: true, mode, });
     }
     
     datepicker = () => {
@@ -103,12 +104,11 @@ class Mensa extends Component {
     }
 
     buildDatePicker() {
-        console.log("Date");
         return (
-            <View>
-                <View>
-                    <Button onPress={this.datepicker} title="Datum" />
-                </View>
+            <View style={styles.datePickerView}>
+                
+                <Button onPress={this.datepicker} title="Datum" style={styles.datePickerButton} />
+                
                 { this.state.show && (
                     <DateTimePicker
                         testID="dateTimePicker"
@@ -121,36 +121,7 @@ class Mensa extends Component {
             </View>
         )
     }
-    */
-
-    buildDatePicker() {
-        return (
-            <DatePicker
-                style={{width: 200}}
-                date={this.state.date}
-                mode="date"
-                placeholder="select date"
-                format="YYYY-MM-DD"
-                minDate="2016-05-01"
-                maxDate="2016-06-01"
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                customStyles={{
-                    dateIcon: {
-                        position: 'absolute',
-                        left: 0,
-                        top: 4,
-                        marginLeft: 0
-                    },
-                    dateInput: {
-                        marginLeft: 36
-                    }
-                }}
-                onDateChange={(date) => {this.setState({date: date})}}
-            />
-        )
-    }
-
+    
     render (){
         const speiseplanObject = { mensaID: this.state.selectedMensa, speiseplan: this.state.feed.items.map(item => item.description) };
         
@@ -159,15 +130,20 @@ class Mensa extends Component {
 
             return(
                 <View style={styles.container}>
-                    {this.buildDatePicker()}
-                    {this.buildMensaPicker()}
+                    <View stlye={styles.PickerContainer}>
+                        {this.buildDatePicker()}
+                        {this.buildMensaPicker()}
+                    </View>
                     <ScrollView>{plan}</ScrollView>
                 </View>
             )
         } else {
             return (
                 <View style={styles.container}>
-                    {this.buildMensaPicker()}
+                    <View stlye={styles.PickerContainer}>
+                        {this.buildDatePicker()}
+                        {this.buildMensaPicker()}
+                    </View>
                     <View style={styles.waitContainer}>
                         <ActivityIndicator size="large" color="#0000ff"/>
                     </View>
@@ -186,8 +162,14 @@ const styles = StyleSheet.create({
       },
     container: {
         backgroundColor: "white",
-        flex: 1,
         width: "100%",
+        flex: 1,
+    },
+    datePickerButton: {
+
+    },
+    datePickerView: {
+
     },
     menuePunktStyle: {
         width: "100%",
@@ -205,15 +187,26 @@ const styles = StyleSheet.create({
         fontSize: 18,       
     },
     mensaPicker: {
-        top: 50,
-        color: "orange",
-        borderStyle: "solid",
+        
     },
     mensaPickerView: {
         backgroundColor: "white",
         height: 70,
-        alignItems: "center",
         justifyContent: "center",
+        alignItems: "center",
+
+        //height: 70,
+        //flex: 1,
+        //alignItems: "center",
+        //justifyContent: "center",
+    },
+    PickerContainer: {
+        //height: 100,
+        //top: 50,
+        //flexDirection: "row",
+        //width: "100%",
+        //flexDirection: "row",
+        //flexWrap: "wrap",
     },
     waitContainer: {
         backgroundColor: "#e1e1e1",
