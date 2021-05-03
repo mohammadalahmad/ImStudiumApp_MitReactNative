@@ -18,6 +18,7 @@ const styles = StyleSheet.create ({
         margin:5,
         borderColor: "#FF9933",
         borderWidth:2,
+         
        
     },
     TextStyle: {
@@ -27,6 +28,7 @@ const styles = StyleSheet.create ({
         alignSelf:"center",
         color: "#FF0000",
         fontSize: 25,
+        
 
     }
 
