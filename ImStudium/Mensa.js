@@ -1,6 +1,6 @@
 //Import needed Libraries
 import React, {Component}from "react";
-import {Alert, Button, Image, Platform, Text, StyleSheet, TouchableOpacity, View, ActivityIndicator} from "react-native";
+import {Alert, Button, Image, Platform, Text, StyleSheet, TouchableOpacity, TouchableHighlight, View, ActivityIndicator} from "react-native";
 import {Picker} from '@react-native-picker/picker';
 import {ScrollView} from "react-native-gesture-handler";
 import * as rssParser from 'react-native-rss-parser';
@@ -111,19 +111,14 @@ class Mensa extends Component {
             });
     }
 
-    getdatespeiseplan(speiseplan) {
-        //console.log("-------------");
-        //console.log(speiseplan);
-        //console.log("+++++++++++++++")
-        
-        var condition = new RegExp(Moment(this.state.selDate).format("DD.MM.YYYY"));
+    getdatespeiseplan(speiseplan) {        
+        var chosenDate = Moment(this.state.selDate).format("DD.MM.YYYY");
         var result = speiseplan.filter(function (item) {
-            return condition.test(item.datum);
+            return item.id === item.url + "#" + chosenDate.toString();
         });
         if(typeof result === "undefined") {
             result = "Geschlossen"
         };
-        //console.log(result[0]);
         return result[0];
     }
 
@@ -138,7 +133,7 @@ class Mensa extends Component {
                     onPress={() => alert("Essen ausgewählt.")}
                 >
                     <View>
-                        <Text style={styles.menuePunktText}>{menuePunkt}</Text>
+                        <Text style={styles.menuePunktText}>{menuePunkt.substring(4, menuePunkt.length - 5).replace("<br/>", "\n")}</Text>
                     </View>
                 </TouchableOpacity>
                 
@@ -146,7 +141,6 @@ class Mensa extends Component {
         } else {
             return (
                 <TouchableOpacity
-                    key={id}
                     style={styles.menuePunktStyle} 
                     onPress={() => alert("Essen ausgewählt.")}
                 >
@@ -201,7 +195,7 @@ class Mensa extends Component {
 
     buildDatePicker() {
         return (
-            <View style={styles.datePickerView}>               
+            <View style={styles.datePickerView}>
                 <TouchableOpacity
                     style={styles.datePickerButton} 
                     onPress={this.datepicker}
@@ -235,11 +229,11 @@ class Mensa extends Component {
         var speiseplanObject;
 
         if(Moment(this.state.selDate).isSame(this.state.today, "isoWeek")) {
-            speiseplanObject = { mensaID: this.state.selectedMensa, speiseplan: this.state.feed.items.map(item => ({datum: item.title, gericht: item.description})) };
+            speiseplanObject = { mensaID: this.state.selectedMensa, speiseplan: this.state.feed.items.map(item => ({url: item.links[0].url, id: item.id, gericht: item.description})) };
         } else {
-            speiseplanObject = { mensaID: this.state.selectedMensa, speiseplan: this.state.feedNaechsteWoche.items.map(item => ({datum: item.title, gericht: item.description})) };
+            speiseplanObject = { mensaID: this.state.selectedMensa, speiseplan: this.state.feedNaechsteWoche.items.map(item => ({url: item.links[0].url, id: item.id, gericht: item.description})) };
         };
-         
+
         if(speiseplanObject.speiseplan.length > 0 && this.state.loading == false) {
             const plan = this.preprocessSpeiseplan(speiseplanObject.speiseplan);
             return(
