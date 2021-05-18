@@ -122,32 +122,50 @@ class Mensa extends Component {
         return result[0];
     }
 
+    buildMenuePunkt(menuePunkt, id) {
+        let ueberschrift = menuePunkt.split("<br/>")[0].substring(4, menuePunkt.length);
+        let text = menuePunkt.split("<br/>")[1].substring(0, menuePunkt.split("<br/>")[1].length - 5);
+        let textSplit = text.split(/(\((([0-9]{1,2})|([A-Za-z]{1})|([0-9]{2}[A-Za-z]{1}))\))/g);
+        let gericht = textSplit[0];
+        let preis = textSplit[textSplit.length - 1].match(/[0-9]{1,2}\,[0-9]{2}/g)[0];
+
+        return (
+            <View
+                key={id}
+                style={styles.menuePunktStyle} 
+            >
+                <View>
+                    <Text style={styles.menuePunktText, {fontWeight: "bold", paddingBottom: 10}}>{ueberschrift}</Text>
+                    <Text style={styles.menuePunktText}>{gericht}</Text>
+                    <Text style={styles.menuePunktText, {paddingTop: 10}}>{"Preis (Studierende mit Kartenzahlung): " + preis}</Text>
+                </View>
+            </View>
+        )
+    }
+
     preprocessSpeiseplan(speiseplan) {
         let selectedSpeiseplan = this.getdatespeiseplan(speiseplan);
         if(typeof selectedSpeiseplan !== "undefined") {
             let sliceSpeiseplan = selectedSpeiseplan.gericht.match(/<li>.*?<\/li>/g);
-            return sliceSpeiseplan.map((menuePunkt, id) => (
-                <TouchableOpacity
-                    key={id}
-                    style={styles.menuePunktStyle} 
-                    onPress={() => alert("Essen ausgewählt.")}
-                >
-                    <View>
-                        <Text style={styles.menuePunktText}>{menuePunkt.substring(4, menuePunkt.length - 5).replace("<br/>", "\n")}</Text>
-                    </View>
-                </TouchableOpacity>
-                
-            ))
-        } else {
-            return (
-                <TouchableOpacity
-                    style={styles.menuePunktStyle} 
-                    onPress={() => alert("Essen ausgewählt.")}
-                >
-                    <View>
+            sliceSpeiseplan.sort();
+            console.log(sliceSpeiseplan);
+            let sliceSpeiseplanFiltered = sliceSpeiseplan.filter((entry) => !entry.match(/(<li>Bagels)|(<li>Baguettebrötchen)/g));
+            if(sliceSpeiseplanFiltered[0].includes("Geschlossen")){
+                return (
+                    <View style={styles.menuePunktStyle}>
                         <Text style={styles.menuePunktText}>Geschlossen</Text>
                     </View>
-                </TouchableOpacity>
+                )
+            } else {
+                return sliceSpeiseplanFiltered.map((menuePunkt, id) => this.buildMenuePunkt(menuePunkt, id)
+                    
+                )
+            }
+        } else {
+            return (
+                <View style={styles.menuePunktStyle}>
+                        <Text style={styles.menuePunktText}>Geschlossen</Text>
+                    </View>
             )
         }
     }
