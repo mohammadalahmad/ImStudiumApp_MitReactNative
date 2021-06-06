@@ -55,7 +55,7 @@ class Einfuegen extends React.Component {
       token: "",
       test5: "",
       tag: "",
-      time: "",
+      time: "", 
       animals: [],
       loading: false,
       selectedId: null,
@@ -600,8 +600,8 @@ class Einfuegen extends React.Component {
                   > 
                     <ListItem.Title style={styles.TextFirebase}>
                       {item.zeit} - {item.fach}  
-                      {"\n"}{item.zeit} - {item.zeit1}: {item.raum}: {item.dozent}{" "}
-                      <TouchableOpacity onPress={() => {
+                      {"\n"}{item.zeit} - {item.zeit1}: {item.raum}: {item.dozent}{" "}  
+                      <TouchableOpacity style={styles.bearbeitenpunkte} onPress={() => {
                       this.setState({ show1: true });
                     }}>
                   <Text style={styles.deletepunkte}> ... </Text>
