@@ -1,15 +1,10 @@
-<<<<<<< HEAD
- //Import needed Libraries
- import React, {Component}from "react";
- import { Text, StyleSheet, View, TouchableOpacity} from "react-native";
- import Stundenplan from "./Stundenplan";
-=======
 //Import needed Libraries
-import React, {Component}from "react";
+import React, {Component} from "react";
 import {Alert, Text, StyleSheet, TouchableOpacity, View} from "react-native";
 // import { useNavigation } from '@react-navigation/native';
 import {ScrollView} from "react-native-gesture-handler";
 import {useNavigation} from '@react-navigation/native';
+//Create Component
 
 var mensaListe = [ // hier weitere Parameter einfügen wie z.B. Öffnungszeiten, RSS-URLs etc.
     { id: 1, name: "Mensa Große Pause", },
@@ -25,34 +20,15 @@ var mensaListe = [ // hier weitere Parameter einfügen wie z.B. Öffnungszeiten,
     { id: 11, name: "Mensa Blumhardtstraße", },
 ];
 
->>>>>>> 6496c866ee6f98adbe520984a2d2ca4195e5d302
-//Create Component
-class Mensa extends React.Component {
+class Mensa extends Component {
     renderMensaListe() {
         const { navigation } = this.props;
 
-<<<<<<< HEAD
-class Mensa extends Component {
-     
-    constructor(props){
-         
-        super();
-        this.state = {
-            title: "Bildschirm von Mensa",
-        }
-    }
-     
-    render (){
-         
-        return(
-            <View style={styles.menu}> 
-                 <Text style= {styles.text}>{this.state.title}</Text> 
-                  
-=======
         return mensaListe.map(einzelneMensa => (
             <TouchableOpacity
                 key={einzelneMensa.id}
                 style={styles.mensaButton} 
+                onPress={() => Alert.alert("Mensa-Auswahl", "Mensa")}
                 onPress={() => navigation.navigate('MensaPlan', { mensaName: einzelneMensa.name })}
             >
                 <View>
@@ -61,27 +37,23 @@ class Mensa extends Component {
             </TouchableOpacity>
         ));
     }
-
+   
     render() {
         return (
             <View style={styles.container}>
                 <ScrollView>
                     {this.renderMensaListe()}
                 </ScrollView>
->>>>>>> 6496c866ee6f98adbe520984a2d2ca4195e5d302
             </View>
         )
     }
-}
 
-// Wrap and export
+}
 export default function(props) {
     const navigation = useNavigation();
 
     return <Mensa navigation={navigation} />;
 }
-
-
 const styles = StyleSheet.create({
 
     container: {
@@ -107,4 +79,7 @@ const styles = StyleSheet.create({
     },
 
 });
+// Export the Component to be avaible for other component in the apps
+ 
+
  
