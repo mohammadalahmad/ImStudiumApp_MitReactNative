@@ -265,12 +265,19 @@ export default StyleSheet.create({
           fontSize: 15,
           fontWeight: 'bold',
         },
-        deletepunkte: {
+         deletepunkte: {
          alignItems: 'flex-end',
-       marginLeft:75,
+         marginLeft:75,
          justifyContent: "flex-end",
          flexDirection: 'row', 
-         fontSize: 40, 
+         fontSize:20,
+         fontWeight: 'bold',
+        
+        
+        },
+         bearbeitenpunkte: {
+         alignItems: 'flex-end',
+          
         }
 
 
