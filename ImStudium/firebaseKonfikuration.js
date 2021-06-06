@@ -1,9 +1,7 @@
 import * as firebase from "firebase";
 import "firebase/firestore";
 import "firebase/auth";
- 
 
- 
 var firebaseConfig = {
     apiKey: "AIzaSyDj-vY3N5PQ1RDLbsbK85G6JBbMmTXMU5c",
     authDomain: "imstudium-b7940.firebaseapp.com",
