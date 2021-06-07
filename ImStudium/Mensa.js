@@ -80,6 +80,3 @@ const styles = StyleSheet.create({
 
 });
 // Export the Component to be avaible for other component in the apps
- 
-
- 
