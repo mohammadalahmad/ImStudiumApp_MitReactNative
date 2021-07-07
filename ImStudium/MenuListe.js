@@ -4,7 +4,6 @@ import {Text,  View, Image, TouchableOpacity} from "react-native";
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Mensa from "./Mensa";
-import MensaPlan from "./MensaPlan";
 import ZuWissen from "./ZuWissen";
 import Einfuegen from "./Einfuegen";
 import Test from "./Test";
@@ -162,14 +161,6 @@ const { navigate } = this.props.navigation;
             </View>
           );
                                         }
-
-  function MensaPlanScreen() {
-          return (
-            <View style={styles.HomeScreen}>
-              <MensaPlan />
-            </View>
-          );
-                              }
  
   function GutZuWissen() {
           return (
@@ -248,7 +239,6 @@ const { navigate } = this.props.navigation;
                   />  
                   <Stack.Screen  name="Stundenplan" component={Stundenplan1}/>
                   <Stack.Screen name="Mensa" component={MensaScreen} />
-                  <Stack.Screen name="MensaPlan" component={MensaPlanScreen} />
                   <Stack.Screen name="Gut Zu Wissen" component={GutZuWissen} 
                   options={{
                     title: '',
