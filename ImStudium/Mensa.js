@@ -236,17 +236,26 @@ class Mensa extends Component {
     preprocessSpeiseplan(speiseplan) {
         let selectedSpeiseplan = this.getdatespeiseplan(speiseplan);
         if(typeof selectedSpeiseplan !== "undefined") {
-            let sliceSpeiseplan = selectedSpeiseplan.gericht.match(/<li>.*?<\/li>/g);
+            let sliceSpeiseplan = selectedSpeiseplan.gericht.match(/<ul>.*?<\/ul>/g);
+            if(sliceSpeiseplan[0].includes("<ul></ul>")){
+                return (
+                    <View style={styles.menuePunktStyle}>
+                        <Text style={styles.menuePunktText}>Kein Speiseplan verfügbar.</Text>
+                    </View>
+                )
+            }
+            sliceSpeiseplan = selectedSpeiseplan.gericht.match(/<li>.*?<\/li>/g);
             sliceSpeiseplan.sort();
             let filterBroetchen = /(<li>Bagels)|(<li>Croissants)|(<li>Gersterling)|(<li>Kuchen)|(<li>Snacks)|(<li>Urknacker)|(<li>[A-ZÄÖÜa-zäöüß]*rötchen)|(<li>[A-ZÄÖÜa-zäöüß]*ebäck)/g;
             let sliceSpeiseplanFiltered = sliceSpeiseplan.filter((entry) => !entry.match(filterBroetchen));
+            
             if(typeof sliceSpeiseplanFiltered[0] === "undefined") {
                 return (
                     <View style={styles.menuePunktStyle}>
                         <Text style={styles.menuePunktText}>Kein Speiseplan verfügbar.</Text>
                     </View>
                 )
-            } else if(sliceSpeiseplanFiltered[0].includes("Geschlossen")){
+            } else if(sliceSpeiseplanFiltered[0].includes("Geschlossen") || sliceSpeiseplanFiltered[0].includes("<ul></ul>")){
                 return (
                     <View style={styles.menuePunktStyle}>
                         <Text style={styles.menuePunktText}>Geschlossen.</Text>
